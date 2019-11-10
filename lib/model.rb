@@ -14,13 +14,13 @@ module Model
 
     class GoWork
         def check(human)
-            (human.mana < 50) && (human.tired < 10)
+            (human.money < 0) && (human.mana > 0)
         end
         def change(human)
             if self.check(human)
-                human.mana -= 30
+                human.mana -= 20
                 human.fun -= 5
-                human.tired += 70
+                human.tired += 50
                 human.money += 100
             end
         end
