@@ -3,6 +3,8 @@ require 'colorize'
 module View
     load 'model.rb'
     class View
+        attr_accessor :path_to_file
+
         def welcome
         puts "HELLLO EPTA".light_white.on_red
         end
@@ -16,7 +18,9 @@ module View
             puts "5. Выпить с маргинальными личностями"
             puts "6. Петь в метро"
             puts "7. Спать"
-            puts "8. Выход из игры"
+            puts "q - Выход из игры"
+            puts "s - Сохранить игру"
+            puts "l - Загрузить игру"
             gets.chomp
         end
     
@@ -29,7 +33,25 @@ module View
             puts "Усталость = #{valera.tired}\n"
             puts "Деньги = #{valera.money}\n\n"
         end
-    
+
+        def save_action
+            puts "Enter path to file: "
+            gets.chomp
+        end
+
+        def save_action_error
+            puts "Save error! Path is empty."
+        end
+
+        def load_action
+            puts "Enter path to file: "
+            gets.chomp
+        end
+
+        def load_action_error
+            puts "Load error! Path is empty."
+        end
+
         def print(msg)
         puts "#{msg}\n"
         end
