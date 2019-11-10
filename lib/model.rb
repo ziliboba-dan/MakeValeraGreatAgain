@@ -1,15 +1,16 @@
 module Model
     class Valera
         attr_accessor :health, :mana, :fun, :tired, :money, :alive
-
-        def initialize
-            @health = 100
-            @mana = 0
-            @fun = 0
-            @tired = 0
-            @money = 0
-            @alive = true
+        
+        def initialize(health, mana, fun, tired, money, alive)
+            @health = health
+            @mana = mana
+            @fun = fun
+            @tired = tired
+            @money = money
+            @alive = alive
         end
+
     end
 
     class GoWork
@@ -41,7 +42,7 @@ module Model
             human.fun -= 1
             human.tired += 10
             human.money -= 20
-            if human.health < 0
+            if human.health <= 0
                 human.alive = false
             end
         end
@@ -54,7 +55,7 @@ module Model
             human.fun += 1
             human.tired += 40
             human.money -= 100
-            if human.health < 0
+            if human.health <= 0
                 human.alive = false
             end
         end
@@ -67,7 +68,7 @@ module Model
             human.fun += 5
             human.tired += 80
             human.money -= 150
-            if human.health < 0
+            if human.health <= 0
                 human.alive = false
             end
         end
@@ -90,17 +91,13 @@ module Model
             if human.mana < 30
                 human.health += 90
             end
-            human.mana -= 50
             if human.mana > 70
                 human.fun -= 3
             end
+            human.mana -= 50
             human.tired -= 70
         end
     end
 end
-# valer = Valera.new
-# valer.init()
 
-# action = GoWork.new
-
-# action.change(valer)
+# valer = Model::Valera.new(100, 0, 0, 0, 0, true)

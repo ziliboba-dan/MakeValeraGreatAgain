@@ -3,8 +3,8 @@ module Controller
     load 'view.rb'
 
     class Controller
-        def initialize
-            @valerik = Model::Valera.new
+        def initialize(health, mana, fun, tired, money, alive)
+            @valerik = Model::Valera.new(health, mana, fun, tired, money, alive)
             @view = View::View.new
         end
 
@@ -54,6 +54,6 @@ module Controller
 end
 
 
-Controller = Controller::Controller.new
+# Controller = Controller::Controller.new
 
-Controller.game_start
+# Controller.game_start
