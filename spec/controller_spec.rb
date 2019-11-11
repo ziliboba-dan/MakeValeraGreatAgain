@@ -1,6 +1,8 @@
 require 'rspec'
 require_relative '../lib/controller.rb'
 
+# TODO: Fix tests
+
 RSpec.describe Controller::Controller do
     subject(:control) { Controller::Controller.new(100, 0, 0, 0, 0, true).do_action(user_action) }
     describe 'action not exit' do

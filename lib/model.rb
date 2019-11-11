@@ -12,6 +12,7 @@ module Model
         end
     end
 
+    # TODO: do decomposition, check negative values
     class GoWork
         attr_reader :human
 
