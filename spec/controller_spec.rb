@@ -48,8 +48,8 @@ RSpec.describe Controller::Controller do
         end
     end
     describe 'action  exit' do    
-        context 'user_action = 8' do
-            let(:user_action) { "8" }
+        context 'user_action = q' do
+            let(:user_action) { "q" }
             it 'shoud be true' do
                 expect(control).to eq true
             end

@@ -20,139 +20,115 @@ RSpec.describe Model::GoWork do
         let(:alive) { true }
         describe 'Go Work' do
             context 'go work without mana' do
-                let(:mana) { 10 }
-                let(:tired) { 5 }
-                it 'shoud be 100, 70, 95, 170, 200' do
-                    gowork.change(valerik)
-                    expect(valerik.health).to eq health
-                    expect(valerik.mana).to eq mana - 30
-                    expect(valerik.fun).to eq fun - 5
-                    expect(valerik.tired).to eq tired + 70
-                    expect(valerik.money).to eq money + 100
-                    expect(valerik.alive).to eq true
-                end
+                subject { Model::GoWork.new(valerik).change }
+                let(:money) { -1 }
+                it { expect { subject }.not_to change { valerik.health } }
+                it { expect { subject }.to change { valerik.mana }.by(-20) }
+                it { expect { subject }.to change { valerik.fun }.by(-5) }
+                it { expect { subject }.to change { valerik.tired }.by(+50) }
+                it { expect { subject }.to change { valerik.money }.by(+100) }
+                it { expect { subject }.not_to change { valerik.alive } }
             end
             context 'go work with mana' do
-                let(:mana) { 60 }
-                it 'shoud be 100, 60, 100, 100, 100' do
-                    gowork.change(valerik)
-                    expect(valerik.health).to eq health
-                    expect(valerik.mana).to eq mana
-                    expect(valerik.fun).to eq fun
-                    expect(valerik.tired).to eq tired
-                    expect(valerik.money).to eq money
-                    expect(valerik.alive).to eq true
-                end
+                subject { Model::GoWork.new(valerik).change }
+                it { expect { subject }.not_to change { valerik.health } }
+                it { expect { subject }.not_to change { valerik.mana } }
+                it { expect { subject }.not_to change { valerik.fun } }
+                it { expect { subject }.not_to change { valerik.tired } }
+                it { expect { subject }.not_to change { valerik.money } }
+                it { expect { subject }.not_to change { valerik.alive } }
             end
         end
         context 'Watch Nature' do
-            it 'shoud be 100, 60, 100, 5, 100' do
-                watchnature.change(valerik)
-                expect(valerik.health).to eq health
-                expect(valerik.mana).to eq mana - 10
-                expect(valerik.fun).to eq fun + 1
-                expect(valerik.tired).to eq tired + 10
-                expect(valerik.money).to eq money
-                expect(valerik.alive).to eq true
-            end
+            subject { Model::WatchNature.new(valerik).change }
+            it { expect { subject }.not_to change { valerik.health } }
+            it { expect { subject }.to change { valerik.mana }.by(-10) }
+            it { expect { subject }.to change { valerik.fun }.by(+1) }
+            it { expect { subject }.to change { valerik.tired }.by(+10) }
+            it { expect { subject }.not_to change { valerik.money } }
+            it { expect { subject }.not_to change { valerik.alive } }
         end
         context 'Drink Wine' do
-            it 'shoud be 100, 60, 100, 5, 100' do
-                drinkwine.change(valerik)
-                expect(valerik.health).to eq health - 5
-                expect(valerik.mana).to eq mana + 30
-                expect(valerik.fun).to eq fun - 1
-                expect(valerik.tired).to eq tired + 10
-                expect(valerik.money).to eq money - 20
-                expect(valerik.alive).to eq true
-            end
+            subject { Model::DrinkWine.new(valerik).change }
+            it { expect { subject }.to change { valerik.health }.by(-5) }
+            it { expect { subject }.to change { valerik.mana }.by(+30) }
+            it { expect { subject }.to change { valerik.fun }.by(-1) }
+            it { expect { subject }.to change { valerik.tired }.by(+10) }
+            it { expect { subject }.to change { valerik.money }.by(-20) }
+            it { expect { subject }.not_to change { valerik.alive } }
         end
         describe "Go to Bar" do
             context 'Go To Bar' do
-                it 'shoud be 100, 60, 100, 5, 100' do
-                    gotobar.change(valerik)
-                    expect(valerik.health).to eq health - 10
-                    expect(valerik.mana).to eq mana + 60
-                    expect(valerik.fun).to eq fun + 1
-                    expect(valerik.tired).to eq tired + 40
-                    expect(valerik.money).to eq money - 100
-                    expect(valerik.alive).to eq true
-                end
+                subject { Model::GoToBar.new(valerik).change }
+                it { expect { subject }.to change { valerik.health }.by(-10) }
+                it { expect { subject }.to change { valerik.mana }.by(+60) }
+                it { expect { subject }.to change { valerik.fun }.by(+1) }
+                it { expect { subject }.to change { valerik.tired }.by(+40) }
+                it { expect { subject }.to change { valerik.money }.by(-100) }
+                it { expect { subject }.not_to change { valerik.alive } }
             end
             context 'Go To Bar and die' do
                 let(:health) { 10 }
-                it 'shoud be 100, 60, 100, 5, 100' do
-                    gotobar.change(valerik)
-                    expect(valerik.health).to eq health - 10
-                    expect(valerik.mana).to eq mana + 60
-                    expect(valerik.fun).to eq fun + 1
-                    expect(valerik.tired).to eq tired + 40
-                    expect(valerik.money).to eq money - 100
-                    expect(valerik.alive).to eq false
-                end
+                subject { Model::GoToBar.new(valerik).change }
+                it { expect { subject }.to change { valerik.health }.by(-10) }
+                it { expect { subject }.to change { valerik.mana }.by(+60) }
+                it { expect { subject }.to change { valerik.fun }.by(+1) }
+                it { expect { subject }.to change { valerik.tired }.by(+40) }
+                it { expect { subject }.to change { valerik.money }.by(-100) }
+                it { expect { subject }.to change { valerik.alive }.to(false) }
             end
         end
         context 'Drink With Marginals' do
-            it 'shoud be 100, 60, 100, 5, 100' do
-                drinkwmarginals.change(valerik)
-                expect(valerik.health).to eq health - 80
-                expect(valerik.mana).to eq mana + 90
-                expect(valerik.fun).to eq fun + 5
-                expect(valerik.tired).to eq tired + 80
-                expect(valerik.money).to eq money - 150
-                expect(valerik.alive).to eq true
-            end
+            subject { Model::DrinkWithMarginals.new(valerik).change }
+            it { expect { subject }.to change { valerik.health }.by(-80) }
+            it { expect { subject }.to change { valerik.mana }.by(+90) }
+            it { expect { subject }.to change { valerik.fun }.by(+5) }
+            it { expect { subject }.to change { valerik.tired }.by(+80) }
+            it { expect { subject }.to change { valerik.money }.by(-150) }
+            it { expect { subject }.not_to change { valerik.alive } }
         end
         describe "Sing in Metro " do
             context 'Sing In Metro 40 < mana < 70' do
                 let(:mana) { 50 }
-                it 'shoud be 100, 60, 100, 5, 100' do
-                    singinmetro.change(valerik)
-                    expect(valerik.health).to eq health
-                    expect(valerik.mana).to eq mana + 10
-                    expect(valerik.fun).to eq fun + 1
-                    expect(valerik.tired).to eq tired + 20
-                    expect(valerik.money).to eq money + 60
-                    expect(valerik.alive).to eq true
-                end
+                subject { Model::SingInMetro.new(valerik).change }
+                it { expect { subject }.not_to change { valerik.health } }
+                it { expect { subject }.to change { valerik.mana }.by(+10) }
+                it { expect { subject }.to change { valerik.fun }.by(+1) }
+                it { expect { subject }.to change { valerik.tired }.by(+20) }
+                it { expect { subject }.to change { valerik.money }.by(+60) }
+                it { expect { subject }.not_to change { valerik.alive } }
             end
 
             context 'Sing In Metro ' do
-                it 'shoud be 100, 60, 100, 5, 100' do
-                    singinmetro.change(valerik)
-                    expect(valerik.health).to eq health
-                    expect(valerik.mana).to eq mana + 10
-                    expect(valerik.fun).to eq fun + 1
-                    expect(valerik.tired).to eq tired + 20
-                    expect(valerik.money).to eq money + 10
-                    expect(valerik.alive).to eq true
-                end
+                subject { Model::SingInMetro.new(valerik).change }
+                it { expect { subject }.not_to change { valerik.health } }
+                it { expect { subject }.to change { valerik.mana }.by(+10) }
+                it { expect { subject }.to change { valerik.fun }.by(+1) }
+                it { expect { subject }.to change { valerik.tired }.by(+20) }
+                it { expect { subject }.to change { valerik.money }.by(+10) }
+                it { expect { subject }.not_to change { valerik.alive } }
             end
         end
         describe "Sleep " do
             context 'Sleep mana < 30 ' do
                 let(:mana) { 20 }
-                it 'shoud be 100, 60, 100, 5, 100' do
-                    sleep.change(valerik)
-                    expect(valerik.health).to eq health + 90
-                    expect(valerik.mana).to eq mana - 50
-                    expect(valerik.fun).to eq fun
-                    expect(valerik.tired).to eq tired - 70
-                    expect(valerik.money).to eq money
-                    expect(valerik.alive).to eq true
-                end
+                subject { Model::Sleep.new(valerik).change }
+                it { expect { subject }.to change { valerik.health }.by(+90) }
+                it { expect { subject }.to change { valerik.mana }.by(-50) }
+                it { expect { subject }.not_to change { valerik.fun } }
+                it { expect { subject }.to change { valerik.tired }.by(-70) }
+                it { expect { subject }.not_to change { valerik.money } }
+                it { expect { subject }.not_to change { valerik.alive } }
             end
 
             context 'Sleep mana > 70 ' do
-                it 'shoud be 100, 60, 100, 5, 100' do
-                    sleep.change(valerik)
-                    expect(valerik.health).to eq health
-                    expect(valerik.mana).to eq mana - 50
-                    expect(valerik.fun).to eq fun - 3
-                    expect(valerik.tired).to eq tired - 70
-                    expect(valerik.money).to eq money
-                    expect(valerik.alive).to eq true
-                end
+                subject { Model::Sleep.new(valerik).change }
+                it { expect { subject }.not_to change { valerik.health } }
+                it { expect { subject }.to change { valerik.mana }.by(-50) }
+                it { expect { subject }.to change { valerik.fun }.by(-3) }
+                it { expect { subject }.to change { valerik.tired }.by(-70) }
+                it { expect { subject }.not_to change { valerik.money } }
+                it { expect { subject }.not_to change { valerik.alive } }
             end
         end
     end

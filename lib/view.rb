@@ -25,7 +25,7 @@ module View
         end
     
         def stats(valera)
-            system('cls')
+            system('clear')
             puts "ВАЛЕРИК:".black.on_white
             puts "Здоровье = #{valera.health}\n"
             puts "Алкоголь в крови = #{valera.mana}\n"
@@ -53,7 +53,7 @@ module View
         end
 
         def print(msg)
-        puts "#{msg}\n"
+            puts "#{msg}\n"
         end
     end
 end

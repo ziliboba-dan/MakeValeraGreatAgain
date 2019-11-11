@@ -3,7 +3,7 @@ module Controller
     load 'view.rb'
 
     class Controller
-        def initialize(health, mana, fun, tired, money, alive)
+        def initialize(health = 100, mana = 40, fun = 50, tired = 10, money = 100, alive = true)
             @valerik = Model::Valera.new(health, mana, fun, tired, money, alive)
             @view = View::View.new
         end
@@ -11,7 +11,7 @@ module Controller
         def save_state(state, path)
             f = File.open path, 'w'
             state.instance_variables.each do |s|
-              f.puts s.to_s[1..-1] + ' ' + state.instance_variable_get(s).to_s
+              f.puts s.to_s[1..] + ' ' + state.instance_variable_get(s).to_s
             end
             f.close unless f.nil?
         end
@@ -29,7 +29,7 @@ module Controller
             f = File.open path, 'r'
             f.each_line do
                 param, val = f.gets.chomp.split ' '
-                state.instance_variable_set(('@' + param), val)
+                state.instance_variable_set(('@' + param), val.to_i)
             end
             f.close unless f.nil?
         end
@@ -58,25 +58,25 @@ module Controller
         def do_action(user_action)
             case user_action
                 when "1"
-                    Model::GoWork.new.change(@valerik)
+                    Model::GoWork.new(@valerik).change
                     exit_game = false
                 when "2"
-                    Model::WatchNature.new.change(@valerik)
+                    Model::WatchNature.new(@valerik).change
                     exit_game = false
                 when "3"
-                    Model::DrinkWine.new.change(@valerik)
+                    Model::DrinkWine.new(@valerik).change
                     exit_game = false
                 when "4"
-                    Model::GoToBar.new.change(@valerik)
+                    Model::GoToBar.new(@valerik).change
                     exit_game = false
                 when "5"
-                    Model::DrinkWithMarginals.new.change(@valerik)
+                    Model::DrinkWithMarginals.new(@valerik).change
                     exit_game = false
                 when "6"
-                    Model::SingInMetro.new.change(@valerik)
+                    Model::SingInMetro.new(@valerik).change
                     exit_game = false
                 when "7"
-                    Model::Sleep.new.change(@valerik)
+                    Model::Sleep.new(@valerik).change
                     exit_game = false
                 when "q"
                     exit_game = true
@@ -88,13 +88,8 @@ module Controller
                     exit_game = false
                 else
                 @view.print("Неизвестный пункт меню")
-                exit_game = true
+                exit_game = false   
             end
         end
     end
 end
-
-
-# Controller = Controller::Controller.new
-
-# Controller.game_start
