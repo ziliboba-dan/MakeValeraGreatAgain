@@ -3,13 +3,13 @@ require_relative '../lib/model.rb'
 
 RSpec.describe Model::GoWork do
     subject(:valerik) { Model::Valera.new(health, mana, fun, tired, money, alive) }
-    subject(:gowork) { Model::GoWork.new }
-    subject(:watchnature) { Model::WatchNature.new }
-    subject(:drinkwine) { Model::DrinkWine.new }
-    subject(:gotobar) { Model::GoToBar.new }
-    subject(:drinkwmarginals) { Model::DrinkWithMarginals.new }
-    subject(:singinmetro) { Model::SingInMetro.new }
-    subject(:sleep) { Model::Sleep.new }
+#subject(:gowork) { Model::GoWork.new }
+    # subject(:watchnature) { Model::WatchNature.new }
+    # subject(:drinkwine) { Model::DrinkWine.new }
+    # subject(:gotobar) { Model::GoToBar.new }
+    # subject(:drinkwmarginals) { Model::DrinkWithMarginals.new }
+    # subject(:singinmetro) { Model::SingInMetro.new }
+    # subject(:sleep) { Model::Sleep.new }
 
     describe 'Valera actions' do
         let(:health) { 100 }

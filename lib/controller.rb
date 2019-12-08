@@ -3,7 +3,7 @@ module Controller
     load 'view.rb'
 
     class Controller
-        def initialize(health = 100, mana = 40, fun = 50, tired = 10, money = 100, alive = true)
+        def initialize(health, mana, fun, tired, money, alive)
             @valerik = Model::Valera.new(health, mana, fun, tired, money, alive)
             @view = View::View.new
         end
@@ -88,7 +88,7 @@ module Controller
                     exit_game = false
                 else
                 @view.print("Неизвестный пункт меню")
-                exit_game = false   
+                exit_game = true   
             end
         end
     end
