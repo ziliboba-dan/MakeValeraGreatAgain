@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+Dir.chdir "../lib"
+load "controller.rb"
+
+valera_control = Controller::Controller.new(health = 70, 
+                                            mana =   50, 
+                                            fun =    90, 
+                                            tired =  20, 
+                                            money =  40, 
+                                            alive =  true)
+
+valera_control.game_start

@@ -3,11 +3,10 @@ require 'colorize'
 module View
     load 'model.rb'
     load 'adapter.rb'
+    
     class View
-        attr_accessor :path_to_file
-
         def welcome
-            IOAdapter.write("hello\n")
+            IOAdapter.write("Hello, marginal element!\n")
         end
     
         def get_user_action
@@ -19,10 +18,10 @@ module View
             4. Сходить а бар
             5. Выпить с маргинальными личностями
             6. Петь в метро
-            7. Спать
-            q - Выход из игры
+            7. Спать\n
             s - Сохранить игру
-            l - Загрузить игру\n")
+            l - Загрузить игру
+            q - Выход из игры\n")
             IOAdapter.read
         end
     
@@ -37,21 +36,21 @@ module View
         end
 
         def save_action
-            IOAdapter.write( "Enter path to file: " )
+            IOAdapter.write( "Введите название файла: " )
             IOAdapter.read
         end
 
-        def save_action_error
-            IOAdapter.write( "Save error! Path is empty." )
+        def save_action_error(msg)
+            IOAdapter.write( "Ошибка при сохранении! #{msg}." )
         end
 
         def load_action
-            IOAdapter.write( "Enter path to file: " )
+            IOAdapter.write( "Укажите путь до файла: " )
             IOAdapter.read
         end
 
-        def load_action_error
-            IOAdapter.write( "Load error! Path is empty." )
+        def load_action_error(msg)
+            IOAdapter.write( "Ошибка при сохранении! #{msg}." )
         end
 
         def print(msg)

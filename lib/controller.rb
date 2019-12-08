@@ -19,7 +19,7 @@ module Controller
         def save_action(state)
             path = @view.save_action
             if path == ''
-                @view.save_action_error
+                @view.save_action_error("Путь не указан")
                 return
             end
             self.save_state(state, path)
@@ -37,7 +37,7 @@ module Controller
         def load_action(state)
             path = @view.load_action
             if path == ''
-                @view.load_action_error
+                @view.load_action_error("Путь не указан")
                 return
             end
             self.load_state(state, path)
