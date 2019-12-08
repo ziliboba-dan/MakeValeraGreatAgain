@@ -2,5 +2,5 @@
 
 ## How to run:
 ``` bash
-cd lib && ./run
+cd bin && ./run
 ```    
