@@ -2,58 +2,60 @@ require 'colorize'
 
 module View
     load 'model.rb'
+    load 'adapter.rb'
     class View
         attr_accessor :path_to_file
 
         def welcome
-        puts "HELLLO EPTA".light_white.on_red
+            IOAdapter.write("hello\n")
         end
     
         def get_user_action
-            puts "Выберите действие:".light_white.on_green
-            puts "1. Пойти на работу"
-            puts "2. Созерцать природу"
-            puts "3. Выпить винца"
-            puts "4. Сходить а бар"
-            puts "5. Выпить с маргинальными личностями"
-            puts "6. Петь в метро"
-            puts "7. Спать"
-            puts "q - Выход из игры"
-            puts "s - Сохранить игру"
-            puts "l - Загрузить игру"
-            gets.chomp
+            IOAdapter.write(
+            "Выберите действие:
+            1. Пойти на работу
+            2. Созерцать природу
+            3. Выпить винца
+            4. Сходить а бар
+            5. Выпить с маргинальными личностями
+            6. Петь в метро
+            7. Спать
+            q - Выход из игры
+            s - Сохранить игру
+            l - Загрузить игру\n")
+            IOAdapter.read
         end
     
         def stats(valera)
-            system('clear')
-            puts "ВАЛЕРИК:".black.on_white
-            puts "Здоровье = #{valera.health}\n"
-            puts "Алкоголь в крови = #{valera.mana}\n"
-            puts "Жизнерадостность = #{valera.fun}\n"
-            puts "Усталость = #{valera.tired}\n"
-            puts "Деньги = #{valera.money}\n\n"
+            system('cls')
+            IOAdapter.write( "ВАЛЕРИК:")
+            IOAdapter.write( "Здоровье = #{valera.health}\n")
+            IOAdapter.write( "Алкоголь в крови = #{valera.mana}\n")
+            IOAdapter.write( "Жизнерадостность = #{valera.fun}\n")
+            IOAdapter.write( "Усталость = #{valera.tired}\n")
+            IOAdapter.write( "Деньги = #{valera.money}\n\n")
         end
 
         def save_action
-            puts "Enter path to file: "
-            gets.chomp
+            IOAdapter.write( "Enter path to file: " )
+            IOAdapter.read
         end
 
         def save_action_error
-            puts "Save error! Path is empty."
+            IOAdapter.write( "Save error! Path is empty." )
         end
 
         def load_action
-            puts "Enter path to file: "
-            gets.chomp
+            IOAdapter.write( "Enter path to file: " )
+            IOAdapter.read
         end
 
         def load_action_error
-            puts "Load error! Path is empty."
+            IOAdapter.write( "Load error! Path is empty." )
         end
 
         def print(msg)
-            puts "#{msg}\n"
+            IOAdapter.write("#{msg}\n")
         end
     end
 end
